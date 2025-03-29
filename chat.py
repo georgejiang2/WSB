@@ -1,6 +1,3 @@
-# gooner
-# goonette
-
 from google import genai
 
 client = genai.Client(api_key="AIzaSyAJZBZN5HBWXtM5zPZiKOyee_MssBU7Htw")
