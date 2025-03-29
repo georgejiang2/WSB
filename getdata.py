@@ -35,12 +35,14 @@ def get_wsb_posts(subreddit='wallstreetbets', days=1):
         if submission.is_self:
             post_url = f"https://www.reddit.com{submission.permalink}"
 
+        # comments by best
+
         posts.append({
             'title': submission.title,
             'text': submission.selftext,
             'id': submission.id,
             'upvotes': submission.score,
-            'comments': [comment.body for comment in submission.comments.list()[:10] if hasattr(comment, 'body')],
+            'comments': [comment.body for comment in submission.comments.list()[1:11] if hasattr(comment, 'body')],
             'created_at': datetime.fromtimestamp(submission.created_utc).strftime('%Y-%m-%d %H:%M:%S'),
             'url': post_url
         })
@@ -48,5 +50,5 @@ def get_wsb_posts(subreddit='wallstreetbets', days=1):
     
     return posts
 
-wsb_posts = get_wsb_posts(days=7)
+wsb_posts = get_wsb_posts(days=30)
 save_to_json(wsb_posts)
