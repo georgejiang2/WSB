@@ -1,0 +1,5 @@
+create venv
+python3 -m venv venv
+
+on mac
+source venv/bin/activate
