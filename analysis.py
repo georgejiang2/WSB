@@ -24,7 +24,10 @@ while i < len(posts_to_process):
 
     # Build prompt for the batch
     prompt = """
-You are analyzing Reddit posts from r/wallstreetbets. For each post, extract ONLY THE MAIN stock ticker being discussed and assign a sentiment score.
+You are analyzing Reddit posts from r/wallstreetbets. For each post, extract ONLY THE MAIN stock ticker being discussed and assign a sentiment score. 
+ONLY include real tickers, not fake ones. Also, only include REAL tickers that are actually mentioned in the post. 
+NO company names, only tickers.
+For example, if they are talking about "GDP", even if its a ticker, its not what the post is about. USE context to understand. 
 
 Score meaning (now from -1.0 to 1.0):
 -1.0: Very bearish (strongly negative)
@@ -50,8 +53,12 @@ Here are the posts:
         text = post["text"]
         upvotes = post.get("upvotes", 0)
         comments = "\n".join(post["comments"][:5])
-        
+
         prompt += f"\nPost ID: {post_id}\nTitle: {title}\nText: {text}\nTop Comments: {comments}\n---"
+
+    # Log current prompt for debugging
+    with open("last_prompt.txt", "w") as f:
+        f.write(prompt)
 
     try:
         # Call Gemini
@@ -101,13 +108,14 @@ Here are the posts:
         error_str = str(e)
         print(f"\n❌ Error in batch {i // batch_size + 1}: {e}")
 
-        if "RESOURCE_EXHAUSTED" in error_str or "429" in error_str:
-            # Extract retry delay if available
+        # Retry logic
+        if "RESOURCE_EXHAUSTED" in error_str or "429" in error_str or "CANCELLED" in error_str:
+            # Retry after delay
             match = re.search(r"'retryDelay': '(\d+)s'", error_str)
             delay = int(match.group(1)) if match else 60
-            print(f"Rate limit hit. Sleeping for {delay} seconds before retrying batch...")
+            print(f"Rate limit or cancellation. Sleeping for {delay} seconds before retrying batch...")
             time.sleep(delay)
-            # Retry same batch (do not increment i)
+            # Do not increment i so it retries same batch
         else:
             # Other error — save and break
             with open(output_file, "w") as f:
