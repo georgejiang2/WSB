@@ -70,10 +70,15 @@ Here are the posts:
             json_str = response_text[json_start:json_end]
             parsed = json.loads(json_str)
 
-            # Add upvotes to parsed results
+            # Add upvotes and created_at to parsed results
             for item in parsed:
                 matching_post = next((p for p in batch if p["id"] == item["post_id"]), None)
-                item["upvotes"] = matching_post.get("upvotes", 0) if matching_post else 0
+                if matching_post:
+                    item["upvotes"] = matching_post.get("upvotes", 0)
+                    item["created_at"] = matching_post.get("created_at", "UNKNOWN")
+                else:
+                    item["upvotes"] = 0
+                    item["created_at"] = "UNKNOWN"
 
             # ✅ Filter out neutral or unknown
             filtered = [item for item in parsed if item["sentiment_score"] != 0.0 and item["ticker"] != "UNKNOWN"]
