@@ -3,7 +3,6 @@ import './Navbar.css';
 import wsbLogo from '../../assets/logo.png';
 import { useNavigate } from 'react-router-dom';
 import { topPosts, wsbChatbot, trading } from '../../router/pages';
-/*import search from '../../assets/search.png'*/
 
 const Navbar = () => {
     const [scrollPosition, setScrollPosition] = useState(0);
@@ -18,8 +17,7 @@ const Navbar = () => {
             window.removeEventListener('scroll', handleScroll);
         };
     }, []);
-
-    // Change this value to set the scroll threshold when the color changes
+    
     const scrollThreshold = 100;
 
     const navigate = useNavigate()
@@ -32,7 +30,7 @@ const Navbar = () => {
             <ul>
                 <li onClick={() => handleClick(topPosts)}>Top Posts</li>
                 <li onClick={() => handleClick(wsbChatbot)}>WSB Chatbot</li>
-                <li onClick={() => handleClick(trading)}>Trading</li>
+                <li onClick={() => handleClick(trading)}>Trading Simulation</li>
             </ul>
         </div>
     )
