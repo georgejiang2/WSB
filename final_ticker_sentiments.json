@@ -20,13 +20,13 @@
   {
     "post_id": "1jmlcz1",
     "ticker": "UNKNOWN",
-    "sentiment_score": -1,
+    "sentiment_score": 0,
     "upvotes": 411
   },
   {
     "post_id": "1jmkmdh",
     "ticker": "TSLA",
-    "sentiment_score": 0,
+    "sentiment_score": -0.5,
     "upvotes": 4645
   },
   {
@@ -43,32 +43,32 @@
   },
   {
     "post_id": "1jmff4z",
-    "ticker": "UNKNOWN",
+    "ticker": "SPY",
     "sentiment_score": -1,
     "upvotes": 244
   },
   {
     "post_id": "1jmei0h",
     "ticker": "UNKNOWN",
-    "sentiment_score": 1,
+    "sentiment_score": 0,
     "upvotes": 113
   },
   {
     "post_id": "1jmbxap",
     "ticker": "AMD",
-    "sentiment_score": -1,
+    "sentiment_score": -0.5,
     "upvotes": 98
   },
   {
     "post_id": "1jmamu6",
     "ticker": "NVDA",
-    "sentiment_score": -1,
+    "sentiment_score": 1,
     "upvotes": 462
   },
   {
     "post_id": "1jm85ur",
     "ticker": "NVDA",
-    "sentiment_score": 0.5,
+    "sentiment_score": 0.2,
     "upvotes": 23
   },
   {
@@ -80,43 +80,43 @@
   {
     "post_id": "1jm6d0s",
     "ticker": "UNKNOWN",
-    "sentiment_score": -1,
+    "sentiment_score": -0.8,
     "upvotes": 1321
   },
   {
     "post_id": "1jm66g1",
     "ticker": "TSLA",
-    "sentiment_score": -1,
+    "sentiment_score": -0.6,
     "upvotes": 250
   },
   {
     "post_id": "1jm63n8",
     "ticker": "LMT",
-    "sentiment_score": 0.75,
+    "sentiment_score": 0.4,
     "upvotes": 244
   },
   {
     "post_id": "1jm5big",
     "ticker": "UNKNOWN",
-    "sentiment_score": -1,
+    "sentiment_score": -0.9,
     "upvotes": 128
   },
   {
     "post_id": "1jm4n08",
     "ticker": "UNKNOWN",
-    "sentiment_score": 0.5,
+    "sentiment_score": 0.3,
     "upvotes": 103
   },
   {
     "post_id": "1jm423v",
     "ticker": "GOOGL",
-    "sentiment_score": -1,
+    "sentiment_score": -0.3,
     "upvotes": 185
   },
   {
     "post_id": "1jm3tgw",
     "ticker": "MSTR",
-    "sentiment_score": -1,
+    "sentiment_score": 1,
     "upvotes": 501
   },
   {
@@ -176,7 +176,7 @@
   {
     "post_id": "1jlxd13",
     "ticker": "SPX",
-    "sentiment_score": -2,
+    "sentiment_score": -1.5,
     "upvotes": 4814
   },
   {
@@ -236,7 +236,7 @@
   {
     "post_id": "1jlvou4",
     "ticker": "NVDA",
-    "sentiment_score": 1,
+    "sentiment_score": 0.7,
     "upvotes": 409
   },
   {
@@ -248,7 +248,7 @@
   {
     "post_id": "1jluq74",
     "ticker": "TRUP",
-    "sentiment_score": 0.2,
+    "sentiment_score": 0.5,
     "upvotes": 0
   },
   {
@@ -260,7 +260,7 @@
   {
     "post_id": "1jlu05i",
     "ticker": "UNKNOWN",
-    "sentiment_score": -0.3,
+    "sentiment_score": -0.5,
     "upvotes": 0
   },
   {
@@ -272,7 +272,7 @@
   {
     "post_id": "1jlsxw4",
     "ticker": "QUBT",
-    "sentiment_score": 0.4,
+    "sentiment_score": 0.25,
     "upvotes": 39
   },
   {
@@ -284,13 +284,13 @@
   {
     "post_id": "1jlsbkb",
     "ticker": "RKLB",
-    "sentiment_score": -0.8,
+    "sentiment_score": -1,
     "upvotes": 38758
   },
   {
     "post_id": "1jls977",
     "ticker": "CBA",
-    "sentiment_score": -0.7,
+    "sentiment_score": -1,
     "upvotes": 0
   },
   {
@@ -302,37 +302,37 @@
   {
     "post_id": "1jlri83",
     "ticker": "ASML",
-    "sentiment_score": 0.3,
+    "sentiment_score": 0.4,
     "upvotes": 10
   },
   {
     "post_id": "1jlqees",
     "ticker": "META",
-    "sentiment_score": -0.2,
+    "sentiment_score": -0.3,
     "upvotes": 286
   },
   {
     "post_id": "1jlp3x8",
     "ticker": "AAPL",
-    "sentiment_score": -0.6,
+    "sentiment_score": -0.7,
     "upvotes": 1818
   },
   {
     "post_id": "1jlp3r1",
     "ticker": "UNKNOWN",
-    "sentiment_score": -0.3,
+    "sentiment_score": -0.2,
     "upvotes": 116
   },
   {
     "post_id": "1jln75x",
     "ticker": "SPY",
-    "sentiment_score": 0.8,
+    "sentiment_score": 0,
     "upvotes": 3943
   },
   {
     "post_id": "1jllrah",
     "ticker": "NVDA",
-    "sentiment_score": -0.9,
+    "sentiment_score": -0.8,
     "upvotes": 1195
   },
   {
@@ -344,7 +344,7 @@
   {
     "post_id": "1jli1pj",
     "ticker": "UNKNOWN",
-    "sentiment_score": -0.7,
+    "sentiment_score": -1,
     "upvotes": 287
   },
   {
@@ -356,7 +356,7 @@
   {
     "post_id": "1jlfts0",
     "ticker": "AGQ",
-    "sentiment_score": 0.9,
+    "sentiment_score": 0.8,
     "upvotes": 0
   },
   {
@@ -368,7 +368,7 @@
   {
     "post_id": "1jleu1l",
     "ticker": "UNKNOWN",
-    "sentiment_score": 0.75,
+    "sentiment_score": 1,
     "upvotes": 2917
   },
   {
@@ -380,19 +380,19 @@
   {
     "post_id": "1jlbzqj",
     "ticker": "APP",
-    "sentiment_score": -0.75,
+    "sentiment_score": -1,
     "upvotes": 213
   },
   {
     "post_id": "1jlbvk0",
     "ticker": "UNKNOWN",
-    "sentiment_score": -0.5,
+    "sentiment_score": -1,
     "upvotes": 0
   },
   {
     "post_id": "1jlak5r",
     "ticker": "UNKNOWN",
-    "sentiment_score": -0.25,
+    "sentiment_score": -0.5,
     "upvotes": 1947
   },
   {
@@ -416,7 +416,7 @@
   {
     "post_id": "1jl6nrr",
     "ticker": "STLA",
-    "sentiment_score": 0.5,
+    "sentiment_score": 0,
     "upvotes": 46
   },
   {
@@ -428,7 +428,7 @@
   {
     "post_id": "1jl2van",
     "ticker": "UNKNOWN",
-    "sentiment_score": -1,
+    "sentiment_score": -0.5,
     "upvotes": 544
   },
   {
@@ -440,7 +440,7 @@
   {
     "post_id": "1jl0cer",
     "ticker": "TSLA",
-    "sentiment_score": -0.5,
+    "sentiment_score": -0.3,
     "upvotes": 243
   },
   {
@@ -452,13 +452,13 @@
   {
     "post_id": "1jktk59",
     "ticker": "UNKNOWN",
-    "sentiment_score": -1,
+    "sentiment_score": -0.7,
     "upvotes": 140
   },
   {
     "post_id": "1jksh12",
     "ticker": "SPX",
-    "sentiment_score": -1,
+    "sentiment_score": -0.5,
     "upvotes": 133
   },
   {
@@ -470,18 +470,18 @@
   {
     "post_id": "1jkr77z",
     "ticker": "UNKNOWN",
-    "sentiment_score": -1,
+    "sentiment_score": -0.7,
     "upvotes": 3387
   },
   {
     "post_id": "1jkqzaa",
     "ticker": "ORCL",
-    "sentiment_score": 0,
+    "sentiment_score": 0.2,
     "upvotes": 1382
   },
   {
     "post_id": "1jkqvu7",
-    "ticker": "OPENAI",
+    "ticker": "UNKNOWN",
     "sentiment_score": 0,
     "upvotes": 423
   },
@@ -494,19 +494,19 @@
   {
     "post_id": "1jkq6eg",
     "ticker": "NVDA",
-    "sentiment_score": -1,
+    "sentiment_score": -0.5,
     "upvotes": 178
   },
   {
     "post_id": "1jkni5w",
-    "ticker": "GM",
-    "sentiment_score": 0,
+    "ticker": "UNKNOWN",
+    "sentiment_score": -0.3,
     "upvotes": 25736
   },
   {
     "post_id": "1jkl16p",
     "ticker": "TSLA",
-    "sentiment_score": -0.5,
+    "sentiment_score": -0.4,
     "upvotes": 352
   },
   {
@@ -524,7 +524,7 @@
   {
     "post_id": "1jkip3a",
     "ticker": "UNKNOWN",
-    "sentiment_score": 0,
+    "sentiment_score": 0.7,
     "upvotes": 1531
   },
   {
@@ -536,7 +536,7 @@
   {
     "post_id": "1jkcg4t",
     "ticker": "UVIX",
-    "sentiment_score": 0,
+    "sentiment_score": 0.3,
     "upvotes": 54
   },
   {
@@ -596,7 +596,7 @@
   {
     "post_id": "1jk2bbt",
     "ticker": "TSLA",
-    "sentiment_score": -0.5,
+    "sentiment_score": -1,
     "upvotes": 5929
   },
   {
@@ -619,7 +619,7 @@
   },
   {
     "post_id": "1jjuhna",
-    "ticker": "VIX",
+    "ticker": "UVXY",
     "sentiment_score": 0,
     "upvotes": 64
   },
@@ -632,7 +632,7 @@
   {
     "post_id": "1jjt9qf",
     "ticker": "TSLA",
-    "sentiment_score": -0.7,
+    "sentiment_score": -0.75,
     "upvotes": 4198
   },
   {
@@ -650,13 +650,13 @@
   {
     "post_id": "1jjrsay",
     "ticker": "NVDA",
-    "sentiment_score": 0,
+    "sentiment_score": 0.5,
     "upvotes": 9676
   },
   {
     "post_id": "1jjqmf3",
     "ticker": "UNKNOWN",
-    "sentiment_score": -0.3,
+    "sentiment_score": -0.5,
     "upvotes": 91
   },
   {
@@ -674,7 +674,7 @@
   {
     "post_id": "1jjmmnx",
     "ticker": "STRK",
-    "sentiment_score": -1,
+    "sentiment_score": -0.5,
     "upvotes": 25
   },
   {
@@ -716,49 +716,49 @@
   {
     "post_id": "1jjah0s",
     "ticker": "UNKNOWN",
-    "sentiment_score": 1,
+    "sentiment_score": 0,
     "upvotes": 201
   },
   {
     "post_id": "1jjaf9p",
     "ticker": "Samsung",
-    "sentiment_score": 0,
+    "sentiment_score": -0.5,
     "upvotes": 745
   },
   {
     "post_id": "1jj9s02",
     "ticker": "IONQ",
-    "sentiment_score": -0.5,
+    "sentiment_score": -0.75,
     "upvotes": 1054
   },
   {
     "post_id": "1jj9lvf",
     "ticker": "SMCI",
-    "sentiment_score": 0.5,
+    "sentiment_score": 0.6,
     "upvotes": 44
   },
   {
     "post_id": "1jj8n0y",
     "ticker": "VAL",
-    "sentiment_score": 1,
+    "sentiment_score": 0.9,
     "upvotes": 96
   },
   {
     "post_id": "1jj6s0v",
     "ticker": "BTC",
-    "sentiment_score": 0.3,
+    "sentiment_score": 0.4,
     "upvotes": 17426
   },
   {
     "post_id": "1jj61nx",
     "ticker": "DIA",
-    "sentiment_score": 0,
+    "sentiment_score": 0.25,
     "upvotes": 38
   },
   {
     "post_id": "1jj547j",
     "ticker": "NVDA",
-    "sentiment_score": 1,
+    "sentiment_score": 0.75,
     "upvotes": 176
   },
   {
@@ -770,19 +770,19 @@
   {
     "post_id": "1jj1zfa",
     "ticker": "SPY",
-    "sentiment_score": 0.2,
+    "sentiment_score": 0.3,
     "upvotes": 72
   },
   {
     "post_id": "1jj0773",
     "ticker": "TSLA",
-    "sentiment_score": 1,
+    "sentiment_score": 0.8,
     "upvotes": 286
   },
   {
     "post_id": "1jizjnw",
     "ticker": "UNKNOWN",
-    "sentiment_score": 0.5,
+    "sentiment_score": 1,
     "upvotes": 973
   },
   {
@@ -800,7 +800,7 @@
   {
     "post_id": "1jivogw",
     "ticker": "KSS",
-    "sentiment_score": 0.75,
+    "sentiment_score": 1,
     "upvotes": 202
   },
   {
@@ -812,7 +812,7 @@
   {
     "post_id": "1jivc89",
     "ticker": "LUNR",
-    "sentiment_score": 0.5,
+    "sentiment_score": 1,
     "upvotes": 495
   },
   {
@@ -836,7 +836,7 @@
   {
     "post_id": "1jisdtr",
     "ticker": "TSLA",
-    "sentiment_score": 0.25,
+    "sentiment_score": 1,
     "upvotes": 1911
   },
   {
@@ -848,7 +848,7 @@
   {
     "post_id": "1jis4vd",
     "ticker": "LUNR",
-    "sentiment_score": 0.5,
+    "sentiment_score": 0.6,
     "upvotes": 197
   },
   {
@@ -896,7 +896,7 @@
   {
     "post_id": "1jin1ut",
     "ticker": "SPY",
-    "sentiment_score": -1,
+    "sentiment_score": 0,
     "upvotes": 256
   },
   {
@@ -914,13 +914,13 @@
   {
     "post_id": "1jihdwp",
     "ticker": "NIO",
-    "sentiment_score": 0.2,
+    "sentiment_score": 0,
     "upvotes": 283
   },
   {
     "post_id": "1jih0ia",
     "ticker": "UNKNOWN",
-    "sentiment_score": -0.3,
+    "sentiment_score": 0,
     "upvotes": 2482
   },
   {
@@ -932,7 +932,7 @@
   {
     "post_id": "1jig2tp",
     "ticker": "PLTR",
-    "sentiment_score": 0.3,
+    "sentiment_score": 0,
     "upvotes": 3054
   },
   {
@@ -943,14 +943,14 @@
   },
   {
     "post_id": "1jieudv",
-    "ticker": "ECHOSTAR",
-    "sentiment_score": -0.7,
+    "ticker": "DISH",
+    "sentiment_score": -0.5,
     "upvotes": 20
   },
   {
     "post_id": "1ji8bie",
     "ticker": "SPY",
-    "sentiment_score": -0.8,
+    "sentiment_score": -1,
     "upvotes": 422
   },
   {
@@ -980,13 +980,13 @@
   {
     "post_id": "1jhowbv",
     "ticker": "SAVEQ",
-    "sentiment_score": -0.6,
+    "sentiment_score": -0.4,
     "upvotes": 0
   },
   {
     "post_id": "1jholy2",
     "ticker": "UNKNOWN",
-    "sentiment_score": 0,
+    "sentiment_score": -0.1,
     "upvotes": 4400
   }
 ]
