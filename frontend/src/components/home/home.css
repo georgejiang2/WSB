@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap');
+
 .logo {
   height: 6em;
   padding: 1.5em;
@@ -15,6 +17,7 @@
   align-items: center;
   text-align: center;
   flex-direction: column;
+  font-family: 'Poppins', sans-serif;
 }
 
 .down {
@@ -23,6 +26,7 @@
   width: 2rem;
   height: auto;
 }
+
 @keyframes rotate {
   0% {
     transform: rotate(-2deg);

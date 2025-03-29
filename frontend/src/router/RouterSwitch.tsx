@@ -9,8 +9,8 @@ export default function RouterSwitch() {
     return (
         <Routes>
             <Route path={pageHome} element={<Home />} />
-            {/*<Route path={pageTopPosts} element={<TopPosts />} />
             <Route path={pageWsbChatbot} element={<WsbChatbot />} />
+            {/*<Route path={pageTopPosts} element={<TopPosts />} />
             <Route path={pageTrading} element={<Trading />} />*/}
         </Routes>
     )
