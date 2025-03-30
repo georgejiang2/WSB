@@ -1,37 +1,48 @@
+# backend/app.py
 from flask import Flask, request, jsonify
 from flask_cors import CORS
 import google.generativeai as genai
 import os
+import json
 
 app = Flask(__name__)
-CORS(app, origins=["http://localhost:5173"])  # Enable CORS for frontend communication
+CORS(app, origins=["http://localhost:5173"])
 
-# Configure API key
-API_KEY = "AIzaSyAJZBZN5HBWXtM5zPZiKOyee_MssBU7Htw"  # Replace with your real API key
+# Replace with your actual API key:
+API_KEY = "AIzaSyAJZBZN5HBWXtM5zPZiKOyee_MssBU7Htw"
 genai.configure(api_key=API_KEY)
-
-# Initialize the Gemini model
 model = genai.GenerativeModel("gemini-2.0-flash")
 
-# File to store conversation history
-base_file = "base.txt"
+# Files for conversation history
+BASE_FILE = os.path.join(os.path.dirname(os.path.abspath(__file__)), "base.txt")
+HISTORY_FILE = os.path.join(os.path.dirname(os.path.abspath(__file__)), "history.txt")
+SENTIMENT_FILE = os.path.join(os.path.dirname(os.path.abspath(__file__)), "agg_sentiment.json")
 
-HISTORY_FILE = "history.txt"
-
-# Function to load conversation history
 def load_history():
-    if os.path.exists(base_file):
-        with open(base_file, "r", encoding="utf-8") as file:
+    if os.path.exists(BASE_FILE):
+        with open(BASE_FILE, "r", encoding="utf-8") as file:
             return file.read()
     return ""
 
-# Function to save conversation history
 def save_history(history):
     with open(HISTORY_FILE, "w", encoding="utf-8") as file:
         file.write(history)
 
-# Load existing history when the server starts
+# Load conversation history on startup
 conversation_history = load_history()
+
+# Load sentiment data (aggregated sentiment)
+try:
+    with open(SENTIMENT_FILE, "r") as f:
+        sentiment_data = json.load(f)
+except Exception as e:
+    print(f"Error loading sentiment data: {e}")
+    sentiment_data = []
+
+# A simple route so you can check the backend is running.
+@app.route("/", methods=["GET"])
+def index():
+    return "Backend is running!", 200
 
 @app.route("/chat", methods=["POST"])
 def chat():
@@ -39,13 +50,31 @@ def chat():
 
     data = request.json
     user_input = data.get("message", "")
-
     if not user_input:
         return jsonify({"error": "No message provided"}), 400
 
-    # Generate response using Gemini
-    response = model.generate_content(user_input + "\nConversation history:\n" + conversation_history)
-    bot_response = response.text
+    # Sort sentiment data by refined_sentiment in descending order.
+    # This selects the top 5 bullish tickers.
+    sorted_tickers = sorted(sentiment_data, key=lambda x: x['refined_sentiment'], reverse=True)
+    top_5 = sorted_tickers[:5]
+    ticker_summary = "\n".join(
+        f"{item['ticker']} (score: {item['refined_sentiment']})" for item in top_5
+    )
+
+    # Build a prompt that includes style instructions and ticker recommendations.
+    prompt = f"""
+Act like a wallstreetbets user, but more normal. Keep responses short and sweet.
+Here are the top tickers based on sentiment:
+{ticker_summary}
+
+User: {user_input}
+
+Conversation history:
+{conversation_history}
+"""
+
+    response = model.generate_content(prompt)
+    bot_response = response.text.strip()
 
     # Update and save conversation history
     conversation_history = user_input + "\n" + bot_response + "\n" + conversation_history

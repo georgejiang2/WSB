@@ -1,22 +1,20 @@
+// frontend/src/components/trading/trading.tsx
 import React, { useState } from 'react';
-import './trading.css';
 import Sidebar from '../sidebar/sidebar';
 import Graph from '../graphs/Graph';
+import './trading.css';
 
-export const Trading = () => {
+const Trading: React.FC = () => {
   const [isSidebarOpen, setIsSidebarOpen] = useState(true);
-  
-  const handleSidebarToggle = (isOpen: boolean | ((prevState: boolean) => boolean)) => {
+
+  const handleSidebarToggle = (isOpen: boolean) => {
     setIsSidebarOpen(isOpen);
   };
 
   return (
     <>
-      {/* Pass the onToggle function to Sidebar */}
-      <div>
-        <Sidebar onToggle={handleSidebarToggle} />
-      </div>
-      <div className={`chat-container ${isSidebarOpen ? 'sidebar-open' : 'sidebar-closed'}`}>
+      <Sidebar onToggle={handleSidebarToggle} />
+      <div className={`trading-container ${isSidebarOpen ? 'sidebar-open' : 'sidebar-closed'}`}>
         <Graph />
       </div>
     </>

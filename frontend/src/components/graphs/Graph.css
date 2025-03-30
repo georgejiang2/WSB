@@ -1,66 +1,101 @@
-/* Stats container styling */
+/* Graph.css */
+
+/* Overall container for the entire graph section */
+.graph-container {
+  background-color: #1e1e2e; /* match your dark theme */
+  padding: 2rem;
+  border-radius: 8px;
+  color: #f8f8f2; /* Light text */
+  min-height: 80vh; /* Some vertical space */
+}
+
+/* Title styling */
+.graph-title {
+  font-size: 1.8rem;
+  font-weight: 600;
+  margin-bottom: 2rem;
+  text-align: center;
+}
+
+/* Loading skeleton container */
+.loading-container {
+  background-color: #2a2a3a;
+  border-radius: 8px;
+  padding: 2rem;
+  text-align: center;
+}
+
+.loading-bar {
+  height: 1rem;
+  width: 6rem;
+  background-color: rgba(255, 255, 255, 0.1);
+  border-radius: 4px;
+}
+.loading-bar.wide {
+  width: 12rem;
+}
+
+/* If you want to keep tailwind utility classes, that's fine;
+   you can adapt them here or remove them. */
+
+/* Stats summary cards at the top */
 .stats-container {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 16px;
-    margin-bottom: 24px;
-    justify-content: space-between;
-  }
-  
-  .stat-card {
-    background-color: rgba(255, 255, 255, 0.07);
-    border-radius: 8px;
-    padding: 16px 20px;
-    flex: 1;
-    min-width: 180px;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
-    transition: transform 0.2s, box-shadow 0.2s;
-  }
-  
-  .stat-card:hover {
-    transform: translateY(-3px);
-    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.2);
-  }
-  
-  .stat-card p:first-child {
-    font-size: 14px;
-    color: rgba(255, 255, 255, 0.6);
-    margin: 0 0 6px 0;
-    font-weight: 500;
-  }
-  
-  .stat-card p:last-child {
-    font-size: 22px;
-    color: rgba(255, 255, 255, 0.9);
-    margin: 0;
-    font-weight: 600;
-  }
-  
-  .stat-card .positive {
-    color: #4caf50;
-  }
-  
-  .stat-card .negative {
-    color: #ff5252;
-  }
-  
-  /* Chart section styling */
-  .chart-section {
-    background-color: rgba(255, 255, 255, 0.04);
-    border-radius: 12px;
-    padding: 20px;
-    margin-top: 24px;
-    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2);
-  }
-  
-  /* Responsive adjustments */
-  @media (max-width: 768px) {
-    .stats-container {
-      flex-direction: column;
-    }
-    
-    .stat-card {
-      min-width: unset;
-      width: 100%;
-    }
-  }
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+  margin-bottom: 24px;
+  justify-content: space-between;
+}
+
+.stat-card {
+  background-color: rgba(255, 255, 255, 0.07);
+  border-radius: 8px;
+  padding: 16px 20px;
+  flex: 1;
+  min-width: 180px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.stat-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.2);
+}
+
+.stat-card p:first-child {
+  font-size: 0.9rem;
+  color: rgba(255, 255, 255, 0.7);
+  margin: 0 0 6px 0;
+  font-weight: 500;
+}
+.stat-card p:last-child {
+  font-size: 1.3rem;
+  color: #fff;
+  margin: 0;
+  font-weight: 600;
+}
+
+.stat-card .positive {
+  color: #4caf50;
+}
+.stat-card .negative {
+  color: #ff5252;
+}
+
+/* The chart section container */
+.chart-section {
+  background-color: rgba(255, 255, 255, 0.04);
+  border-radius: 12px;
+  padding: 20px;
+  margin-top: 24px;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2);
+}
+
+/* If no data is available */
+.empty-data-container {
+  background-color: #2a2a3a;
+  padding: 2rem;
+  border-radius: 8px;
+  text-align: center;
+  color: #fff;
+}

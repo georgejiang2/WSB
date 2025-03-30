@@ -1,11 +1,22 @@
-import React from 'react';
-import './topposts.css';
+// frontend/src/components/topposts/topposts.tsx
+import React, { useState } from 'react';
 import Sidebar from '../sidebar/sidebar';
+import './topposts.css';
 
-export const TopPosts = () => {
+const TopPosts: React.FC = () => {
+  const [isSidebarOpen, setIsSidebarOpen] = useState(true);
+
+  const handleSidebarToggle = (isOpen: boolean) => {
+    setIsSidebarOpen(isOpen);
+  };
+
   return (
     <>
-        <div> <Sidebar /> </div>
+      <Sidebar onToggle={handleSidebarToggle} />
+      <div className={`topposts-container ${isSidebarOpen ? 'sidebar-open' : 'sidebar-closed'}`}>
+        <h1>Top Posts</h1>
+        <p>Content for top posts...</p>
+      </div>
     </>
   );
 };
