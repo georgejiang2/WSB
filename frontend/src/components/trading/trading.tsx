@@ -12,7 +12,7 @@ export const Trading = () => {
   
   return (
     <>
-      <Sidebar isOpen={isSidebarOpen} onToggle={handleSidebarToggle} />
+      <Sidebar onToggle={handleSidebarToggle} />
       <div className={`trading-container ${isSidebarOpen ? '' : 'sidebar-closed'}`}>
         <div className={`trading-content ${isSidebarOpen ? '' : 'sidebar-closed'}`}>
           <Graph />
