@@ -15,7 +15,7 @@ export const WsbChatbot = () => {
                     </div>
                     <div class="messages">
                         <div class="avatar-container user-avatar"  style={{ display: 'flex', alignItems: 'center', justifyContent: 'flex-end' }}>
-                            <span class="username">User</span>
+                            <span className="username">User</span>
                             <img src={char2} alt="User Avatar" class="avatar" style = {{ width: '3rem', height: 'auto', borderRadius: '50%', objectFit: 'cover', marginLeft: '10px'}} />
                         </div>
                         <div class="message user-message">
