@@ -2,10 +2,10 @@ import { useState, useRef } from 'react'
 import wsbLogo from '../../assets/WSB.png'
 import downArrow from '../../assets/down.png'
 import stock from '../../assets/stock.png'
-import community from '../../assets/community.png'
+//import community from '../../assets/community.png'
 import chatbot from '../../assets/chatbot.png'
 import { useNavigate } from 'react-router-dom';
-import { pageTopPosts, pageWsbChatbot, pageTrading } from '../../router/router';
+import { pageTopPosts , pageWsbChatbot, pageTrading } from '../../router/router';
 import './home.css'
 
 export const Home = () => {
