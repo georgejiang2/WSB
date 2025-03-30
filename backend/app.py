@@ -61,7 +61,8 @@ def chat():
 
     # Prompt instructing the model to avoid bracket/markdown formatting
     prompt = f"""
-Act like a normal WSB user. Keep responses short, sweet, and do not use bracket or markdown formatting.
+Act like a typical WSB user. Keep responses casual and avoid using any formatting like brackets or markdown. 
+Provide a mix of different opinions and reactions to the tickers listed below, ranging from hype to skepticism. 
 Here are the top 5 tickers based on sentiment: {ticker_summary}
 
 User: {user_input}
