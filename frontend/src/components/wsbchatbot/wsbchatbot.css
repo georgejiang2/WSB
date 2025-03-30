@@ -234,8 +234,8 @@
 
 .chat-container {
   position: relative;
-  width: calc(100% - 250px); /* Adjusts width based on sidebar being open */
-  margin-left: 250px;
+  width: calc(100% - 150px); /* Adjusts width based on sidebar being open */
+  margin-left: 150px;
   background-color: var(--bg-dark);
   display: flex;
   flex-direction: column;

@@ -33,9 +33,9 @@ export const Sidebar: React.FC<SidebarProps> = ({ onToggle }) => {
   return (
     <>
       <div className={`sidebar ${isSidebarOpen ? 'open' : 'closed'}`}>
-        <div className="sidebar-header">
+        <a href ="/"> <div className="sidebar-header">
           <img src={wsbLogo} alt="wsb logo" />
-        </div>
+        </div> </a>
         <div className="sidebar-content">
           <ul className="sidebar-menu">
             <a href="/top-posts">

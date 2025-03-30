@@ -4,12 +4,10 @@ import Sidebar from '../sidebar/sidebar';
 import Graph from '../graphs/Graph';
 
 export const Trading = () => {
-  // State to manage the sidebar's open/closed state
-  const [sidebarOpen, setSidebarOpen] = useState(true);
-
-  // Function to toggle the sidebar state
-  const handleSidebarToggle = (newState: boolean) => {
-    setSidebarOpen(newState);
+  const [isSidebarOpen, setIsSidebarOpen] = useState(true);
+  
+  const handleSidebarToggle = (isOpen: boolean | ((prevState: boolean) => boolean)) => {
+    setIsSidebarOpen(isOpen);
   };
 
   return (
@@ -18,7 +16,7 @@ export const Trading = () => {
       <div>
         <Sidebar onToggle={handleSidebarToggle} />
       </div>
-      <div>
+      <div className={`chat-container ${isSidebarOpen ? 'sidebar-open' : 'sidebar-closed'}`}>
         <Graph />
       </div>
     </>

@@ -2,6 +2,7 @@ import React, { useState, useEffect, useRef } from "react";
 import MyChart from "./MyChart";
 import sampleData from "../../portfolio_data/portfolio_total_investment.json";
 import spxData from "../../portfolio_data/spx_data.json";
+import './Graph.css';
 
 // Define the expected structure of the portfolio data
 interface PortfolioEntry {
@@ -115,7 +116,7 @@ const Graph: React.FC = () => {
     return (
         <div className="bg-gray-50 p-6 rounded-lg">
             <div className="mb-6">
-                <h1 className="text-2xl font-bold text-gray-800 mb-2">Portfolio Performance Dashboard</h1>
+                <h1 className="text-2xl font-bold text-gray-800 mb-2" style={{paddingBottom: "4vh"}}>Portfolio Performance Dashboard</h1>
             </div>
             
             {isLoading ? (
@@ -129,41 +130,36 @@ const Graph: React.FC = () => {
                 <>
                     {/* Stats Summary Cards */}
                     {stats && (
-                        <div className="grid grid-cols-1 md:grid-cols-4 gap-4 mb-6">
-                            <div className="bg-white p-4 rounded-lg shadow-sm border border-gray-100">
-                                <p className="text-sm text-gray-500 mb-1">Total Investment</p>
-                                <p className="text-xl font-bold text-gray-800">{stats.currentInvestment}</p>
+                        <div className="stats-container">
+                            <div className="stat-card">
+                            <p>Total Investment</p>
+                            <p>{stats.currentInvestment}</p>
                             </div>
-                            <div className="bg-white p-4 rounded-lg shadow-sm border border-gray-100">
-                                <p className="text-sm text-gray-500 mb-1">Total Profit</p>
-                                <p className="text-xl font-bold text-gray-800">{stats.totalProfit}</p>
+                            <div className="stat-card">
+                            <p>Total Profit</p>
+                            <p>{stats.totalProfit}</p>
                             </div>
-                            <div className="bg-white p-4 rounded-lg shadow-sm border border-gray-100">
-                                <p className="text-sm text-gray-500 mb-1">Your ROI</p>
-                                <p className={`text-xl font-bold ${parseFloat(stats.overallChangePercent) >= 0 ? 'text-green-600' : 'text-red-600'}`}>
-                                    {stats.overallChangePercent}%
-                                </p>
+                            <div className="stat-card">
+                            <p>Your ROI</p>
+                            <p className={parseFloat(stats.overallChangePercent) >= 0 ? 'positive' : 'negative'}>
+                                {stats.overallChangePercent}%
+                            </p>
                             </div>
-                            <div className="bg-white p-4 rounded-lg shadow-sm border border-gray-100">
-                                <p className="text-sm text-gray-500 mb-1">S&P 500 Return</p>
-                                <p className={`text-xl font-bold ${
-                                    stats.spxPerformance !== "N/A" && parseFloat(stats.spxPerformance) >= 0 
-                                    ? 'text-green-600' : 'text-red-600'}`}>
-                                    {stats.spxPerformance}
-                                </p>
+                            <div className="stat-card">
+                            <p>S&P 500 Return</p>
+                            <p className={stats.spxPerformance !== "N/A" && parseFloat(stats.spxPerformance) >= 0 ? 'positive' : 'negative'}>
+                                {stats.spxPerformance}
+                            </p>
                             </div>
                         </div>
-                    )}
-                    
-                    {/* Main Chart */}
-                    {comparisonData.length > 0 && (
-                        <MyChart 
-                            chartData={comparisonData} 
-                            xKey="date" 
-                            title="Performance Comparison" 
-                            subtitle="WSB vs. S&P 500"
-                        />
-                    )}
+                        )}
+
+                        {/* Main Chart */}
+                        {comparisonData.length > 0 && (
+                        <div className="chart-section">
+                            <MyChart chartData={comparisonData} xKey="date" title="Performance Comparison" subtitle="WSB vs. S&P 500" />
+                        </div>
+                        )}
                     
                 </>
             ) : (
