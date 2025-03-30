@@ -59,7 +59,7 @@
 
 .card {
   padding: 2em;
-  background-color: rgba(255, 255, 255, 0.05);
+  background-color: rgba(255, 255, 255, 0.95);
   border-radius: 8px;
   margin: 6rem 0;
   max-width: 800px;

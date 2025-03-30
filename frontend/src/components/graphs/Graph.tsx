@@ -118,55 +118,60 @@ const Graph: React.FC = () => {
             <div className="mb-6">
                 <h1 className="text-2xl font-bold text-gray-800 mb-2" style={{paddingBottom: "4vh"}}>Portfolio Performance Dashboard</h1>
             </div>
-            
-            {isLoading ? (
-                <div className="flex justify-center items-center h-64 bg-white rounded-lg border border-gray-200">
-                    <div className="animate-pulse flex flex-col items-center">
-                        <div className="h-4 w-24 bg-gray-200 rounded mb-3"></div>
-                        <div className="h-32 w-full max-w-md bg-gray-200 rounded"></div>
-                    </div>
-                </div>
-            ) : portfolioData.length ? (
-                <>
-                    {/* Stats Summary Cards */}
-                    {stats && (
-                        <div className="stats-container">
-                            <div className="stat-card">
-                            <p>Total Investment</p>
-                            <p>{stats.currentInvestment}</p>
-                            </div>
-                            <div className="stat-card">
-                            <p>Total Profit</p>
-                            <p>{stats.totalProfit}</p>
-                            </div>
-                            <div className="stat-card">
-                            <p>Your ROI</p>
-                            <p className={parseFloat(stats.overallChangePercent) >= 0 ? 'positive' : 'negative'}>
-                                {stats.overallChangePercent}%
-                            </p>
-                            </div>
-                            <div className="stat-card">
-                            <p>S&P 500 Return</p>
-                            <p className={stats.spxPerformance !== "N/A" && parseFloat(stats.spxPerformance) >= 0 ? 'positive' : 'negative'}>
-                                {stats.spxPerformance}
-                            </p>
-                            </div>
-                        </div>
-                        )}
 
-                        {/* Main Chart */}
-                        {comparisonData.length > 0 && (
-                        <div className="chart-section">
-                            <MyChart chartData={comparisonData} xKey="date" title="Performance Comparison" subtitle="WSB vs. S&P 500" />
-                        </div>
-                        )}
-                    
-                </>
-            ) : (
-                <div className="bg-white p-6 rounded-lg shadow-sm border border-gray-200 text-center">
-                    <p className="text-gray-600">No portfolio data available</p>
+        <div className="grid-container">
+        {isLoading ? (
+            <div className="flex justify-center items-center h-64 bg-white rounded-lg border border-gray-200">
+                <div className="animate-pulse flex flex-col items-center">
+                    <div className="h-4 w-24 bg-gray-200 rounded mb-3"></div>
+                    <div className="h-32 w-full max-w-md bg-gray-200 rounded"></div>
                 </div>
-            )}
+            </div>
+        ) : portfolioData.length ? (
+            <>
+                {/* Stats Summary Cards */}
+                {stats && (
+                    <div className="stats-container">
+                        <div className="stat-card">
+                        <p>Total Investment</p>
+                        <p>{stats.currentInvestment}</p>
+                        </div>
+                        <div className="stat-card">
+                        <p>Total Profit</p>
+                        <p>{stats.totalProfit}</p>
+                        </div>
+                        <div className="stat-card">
+                        <p>Your ROI</p>
+                        <p className={parseFloat(stats.overallChangePercent) >= 0 ? 'positive' : 'negative'}>
+                            {stats.overallChangePercent}%
+                        </p>
+                        </div>
+                        <div className="stat-card">
+                        <p>S&P 500 Return</p>
+                        <p className={stats.spxPerformance !== "N/A" && parseFloat(stats.spxPerformance) >= 0 ? 'positive' : 'negative'}>
+                            {stats.spxPerformance}
+                        </p>
+                        </div>
+                    </div>
+                    )}
+
+                    <div className="explanation">
+                        <p>The total investment for our portfolio is calculated by adding the amount from buying and shorting stocks. Our percentage gain is calculated if we sold and bought back all stocks traded in the last 30 days, starting from the initial price. Stocks are traded based on post sentiment and upvotes.</p>
+                    </div>
+                    {/* Main Chart */}
+                    {comparisonData.length > 0 && (
+                    <div className="chart-section">
+                        <MyChart chartData={comparisonData} xKey="date" title="Performance Comparison" subtitle="WSB vs. S&P 500" />
+                    </div>
+                    )}
+                    
+            </>
+        ) : (
+            <div className="bg-white p-6 rounded-lg shadow-sm border border-gray-200 text-center">
+                <p className="text-gray-600">No portfolio data available</p>
+            </div>
+        )}
+        </div>
         </div>
     );
 };

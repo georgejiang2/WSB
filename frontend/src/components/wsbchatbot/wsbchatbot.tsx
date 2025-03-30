@@ -44,8 +44,9 @@ export const WsbChatbot = () => {
                   </div>
                 </div>
               </div>
+              <input type="text" className="chat-input" placeholder="Type your message..." style = {{marginTop: '10rem'}}/>
             </div>
-            <input type="text" className="chat-input" placeholder="Type your message..." />
+            
           </div>
         </div>
       </div>
