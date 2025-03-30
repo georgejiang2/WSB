@@ -42,12 +42,13 @@ export const Home = () => {
         <br></br>
         <br></br>
         <div className="features">
+          {/*
           <div className="feature-card" onClick={() => handleClick(pageTopPosts)}>
             <div className="feature-icon"><img src={community} alt="community logo" style={{ width: '12rem', height: 'auto' }} /></div>
             <h3>Community Insights</h3>
             <p>Stay updated with the latest WSB discussions and trends</p>
           </div>
-          
+          */}
           <div className="feature-card" onClick={() => handleClick(pageWsbChatbot)}>
             <div className="feature-icon"><img src={chatbot} alt="chatbot logo" style={{ width: '12rem', height: 'auto' }} /></div>
             <h3>AI Chatbot</h3>
