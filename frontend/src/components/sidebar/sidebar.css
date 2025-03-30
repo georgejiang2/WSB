@@ -14,6 +14,7 @@
     flex-direction: column;
     box-shadow: 2px 0 10px rgba(0, 0, 0, 0.2);
     font-family: Poppins;
+    overflow: hidden;
 }
 
 .sidebar.open {
@@ -118,7 +119,7 @@
 }
 
 .sidebar-menu a {
-    color: #e6e6e6; /* Ensure the color is consistent */
+    color: inherit; /* Inherit color from parent */
     text-decoration: none; /* Remove underline if needed */
     transition: color 0.3s ease;
 }
