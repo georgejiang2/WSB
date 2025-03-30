@@ -12,9 +12,9 @@ print(response.text)
 conversation_history = user_input + response.text
 
 print("----------------------------------------------------------------------------------------------------")
+user_input = input()
 
 while user_input != "end":
-    user_input = input()
     response = client.models.generate_content(model="gemini-2.0-flash", contents=user_input + "\nconversation history, use only for context: \n" + conversation_history)
     print(response.text)
 
@@ -22,3 +22,5 @@ while user_input != "end":
     conversation_history =user_input + response.text + conversation_history
 
     print("----------------------------------------------------------------------------------------------------")
+    
+    user_input = input()
