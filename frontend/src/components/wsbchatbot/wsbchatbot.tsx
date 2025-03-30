@@ -7,7 +7,7 @@ import Sidebar from '../sidebar/sidebar';
 export const WsbChatbot = () => {
   const [isSidebarOpen, setIsSidebarOpen] = useState(true);
   
-  const handleSidebarToggle = (isOpen) => {
+  const handleSidebarToggle = (isOpen: boolean | ((prevState: boolean) => boolean)) => {
     setIsSidebarOpen(isOpen);
   };
 
