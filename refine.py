@@ -10,6 +10,8 @@ with open('final_ticker_sentiments.json', 'r') as file:
 # Process each post in the data
 for entry in data:
     ticker = entry["ticker"]
+    if ticker == "SPX":
+        ticker = "SPY"
     created_at = entry["created_at"]
     sentiment_score = entry["sentiment_score"]
     upvotes = entry["upvotes"]
