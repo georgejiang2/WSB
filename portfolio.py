@@ -44,7 +44,7 @@ def download_with_retry(ticker, start_date, end_date, max_retries=5, base_delay=
     return pd.DataFrame()
 
 # Ensure output directory exists
-output_dir = "portfolio_data"
+output_dir = "frontend/src/portfolio_data"
 if not os.path.exists(output_dir):
     os.makedirs(output_dir)
 
@@ -80,8 +80,6 @@ def get_next_trading_day(date_str):
 # Initialize portfolio and trading queue
 portfolio = {'long': {}, 'short': {}}  # Separate long and short positions
 cost_basis = {'long': {}, 'short': {}}  # Track individual position cost basis
-portfolio_value_history = []
-daily_pnl_history = []
 trading_queue = defaultdict(list)  # Dictionary with date as key and list of trades as value
 
 # For tracking actual cash invested
@@ -107,10 +105,8 @@ valuation_dates = sorted(set(valuation_dates))  # Remove duplicates and re-sort
 # For storing detailed portfolio data
 daily_portfolio_data = []
 
-portfolio_total_investment = []
-profit_history = []
+portfolio_statistics = []
 
-total_investment = 0.0
 # Process trading days
 
 daily_data = {
@@ -130,6 +126,7 @@ for date in valuation_dates:
     daily_data['trades'] = []
     daily_data['positions'] = {'long': {}, 'short': {}}
     daily_data['today_profit'] = 0.0
+    total_investment = 0.0
     
 
     # Execute any pending trades for this date
@@ -226,7 +223,8 @@ for date in valuation_dates:
                 # Calculate market value of this position
                 position_value = shares * close_price # money rn
                 position_cost = cost_basis['long'][ticker] # how much it costed
-                
+                cost_basis['long'][ticker] = position_value
+
                 # Calculate P&L - for long positions, profit is current value minus cost
                 position_pnl = position_value - position_cost
                 long_profit += position_pnl
@@ -264,7 +262,8 @@ for date in valuation_dates:
                 # Calculate market value of this position (negative for shorts)
                 position_value = shares * close_price  # current price
                 position_cost = cost_basis['short'][ticker]  #  price u shorted at
-                
+                cost_basis['short'][ticker] = position_value
+
                 # Calculate P&L - for short positions, profit is cost minus current value
                 position_pnl = position_cost - position_value
                 short_profit += position_pnl
@@ -292,14 +291,11 @@ for date in valuation_dates:
     daily_portfolio_data.append(daily_data)
     
 
-    portfolio_total_investment.append({
+    portfolio_statistics.append({
         'date': date,
-        'investment': daily_data['total_investment']
-    })
-    
-    profit_history.append({
-        'date': date,
-        'pnl': daily_data['today_profit']
+        'investment': daily_data['total_investment'],
+        'today_profit': daily_data['today_profit'],
+        'total_profit': daily_data['total_profit']
     })
     
     # Save daily data to JSON file
@@ -318,8 +314,7 @@ history_filename = os.path.join(output_dir, "portfolio_total_investment.json")
 with open(history_filename, 'w') as file:
     json.dump({
         'daily_data': daily_portfolio_data,
-        'portfolio_total_investment': portfolio_total_investment,
-        'profit_history': profit_history,
+        'portfolio_statistics': portfolio_statistics,
         'initial_investment_date': initial_investment_date,
         'total_investment': daily_data['total_investment']
     }, file, indent=2)
@@ -337,15 +332,12 @@ for ticker, shares in portfolio['short'].items():
     if shares != 0:  # Show all non-zero positions
         print(f"{ticker}: {abs(shares):.4f} shares Short, Cost Basis: ${cost_basis['short'][ticker]:.2f}")
 
-print("\nPortfolio Value History:")
-for record in portfolio_value_history:
-    print(f"{record['date']}: ${record['value']:.2f}")
 
 print("\nDaily P&L History:")
-for record in profit_history:
-    print(f"{record['date']}: ${record['pnl']:.2f}")
+for record in portfolio_statistics:
+    print(f"{record['date']}: ${record['today_profit']:.2f}")
 
 # Calculate total return
-if profit_history:
-    total_return = sum(record['pnl'] for record in profit_history)
+if portfolio_statistics:
+    total_return = sum(record['today_profit'] for record in portfolio_statistics)
     print(f"\nCumulative P&L: ${total_return:.2f}")
