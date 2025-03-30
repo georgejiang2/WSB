@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import './sidebar.css';
 import wsbLogo from '../../assets/WSB.png'
-import Graph from '../graphs/Graph.tsx'
 
 export const Sidebar = () => {
   const [isSidebarOpen, setIsSidebarOpen] = useState(true);
@@ -19,7 +18,7 @@ export const Sidebar = () => {
         <div className="sidebar-content">
           <ul className="sidebar-menu">
             <a href="/top-posts">
-                <li className="sidebar-item active">
+                <li className="sidebar-item">
                     <span className="sidebar-icon">🚀</span>
                     {isSidebarOpen && <span className="sidebar-label">Trending</span>}
                 </li>
@@ -30,7 +29,7 @@ export const Sidebar = () => {
                     {isSidebarOpen && <span className="sidebar-label">WSB Chatbot</span>}
                 </li>
             </a>
-            <a href="/top-posts">
+            <a href="/trading">
                 <li className="sidebar-item">
                     <span className="sidebar-icon">📈</span>
                     {isSidebarOpen && <span className="sidebar-label">Simulation</span>}
