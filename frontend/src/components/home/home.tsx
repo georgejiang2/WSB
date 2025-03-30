@@ -35,7 +35,7 @@ export const Home = () => {
           onClick={scrollToFeatures}
         />
       </div>
-      
+      <div>
       <div className="content-section" ref={featuresRef}>
         <h2>Market Analysis Tools</h2>
         <p>Advanced tools powered by r/wallstreetbets sentiment analysis</p>
@@ -70,6 +70,7 @@ export const Home = () => {
       <footer>
         <p>HackPSU 2025 | r/wallstreetbets Analyst</p>
       </footer>
+      </div>
     </>
   )
 };

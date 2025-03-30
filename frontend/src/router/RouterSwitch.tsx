@@ -1,5 +1,5 @@
 import { Route, Routes } from "react-router-dom";
-import { pageHome, pageTopPosts, pageWsbChatbot, pageTrading } from "./Router"
+import { pageHome, pageTopPosts, pageWsbChatbot, pageTrading } from "./router"
 import { Home } from "../components/home/home"
 import { TopPosts } from "../components/topposts/topposts"
 import { WsbChatbot } from "../components/wsbchatbot/wsbchatbot"

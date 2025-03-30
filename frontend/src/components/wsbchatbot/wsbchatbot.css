@@ -24,21 +24,6 @@
     display: flex;
     height: 100vh;
   }
-
-  .chat-container {
-    position: relative;
-    width: 100%;
-    margin-left: 250px;
-    background-color: var(--bg-dark);
-    display: flex;
-    flex-direction: column;
-    flex-grow: 1;
-    overflow-y: hidden;
-    margin: 0;
-    border-radius: 0; /* Remove border radius */
-    box-shadow: none; /* Remove shadow */
-    height: 100vh; /* Full height */
-  }
   
   /* New top bar */
   .chat-header {
@@ -236,6 +221,7 @@
   position: relative;
   width: calc(100% - 150px); /* Adjusts width based on sidebar being open */
   margin-left: 150px;
+  margin-right: 0px;
   background-color: var(--bg-dark);
   display: flex;
   flex-direction: column;

@@ -9,15 +9,14 @@ export const Trading = () => {
   const handleSidebarToggle = (isOpen: boolean | ((prevState: boolean) => boolean)) => {
     setIsSidebarOpen(isOpen);
   };
-
+  
   return (
     <>
-      {/* Pass the onToggle function to Sidebar */}
-      <div>
-        <Sidebar onToggle={handleSidebarToggle} />
-      </div>
-      <div className={`chat-container ${isSidebarOpen ? 'sidebar-open' : 'sidebar-closed'}`}>
-        <Graph />
+      <Sidebar onToggle={handleSidebarToggle} />
+      <div className={`trading-container ${isSidebarOpen ? '' : 'sidebar-closed'}`}>
+        <div className={`trading-content ${isSidebarOpen ? '' : 'sidebar-closed'}`}>
+          <Graph />
+        </div>
       </div>
     </>
   );
