@@ -1,11 +1,15 @@
 import React, { useState, useEffect } from 'react';
 import './sidebar.css';
-import wsbLogo from '../../assets/WSB.png'
+import wsbLogo from '../../assets/WSB.png';
 
-export const Sidebar = ({ onToggle }) => {
+interface SidebarProps {
+  onToggle: (state: boolean) => void;
+}
+
+export const Sidebar: React.FC<SidebarProps> = ({ onToggle }) => {
   const [isSidebarOpen, setIsSidebarOpen] = useState(true);
   const [activeItem, setActiveItem] = useState<string | null>(null);
-  
+
   const toggleSidebar = () => {
     const newState = !isSidebarOpen;
     setIsSidebarOpen(newState);
@@ -14,18 +18,18 @@ export const Sidebar = ({ onToggle }) => {
       onToggle(newState);
     }
   };
-  
+
   // Initialize parent with sidebar state
   useEffect(() => {
     if (onToggle) {
       onToggle(isSidebarOpen);
     }
-  }, []);
-  
+  }, [isSidebarOpen, onToggle]);
+
   const handleItemClick = (item: string) => {
     setActiveItem(item);
   };
-  
+
   return (
     <>
       <div className={`sidebar ${isSidebarOpen ? 'open' : 'closed'}`}>
