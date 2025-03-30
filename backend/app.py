@@ -1,14 +1,15 @@
-# backend/app.py
+# app.py
 from flask import Flask, request, jsonify
 from flask_cors import CORS
 import google.generativeai as genai
 import os
 import json
+import re
 
 app = Flask(__name__)
 CORS(app, origins=["http://localhost:5173"])
 
-# Replace with your actual API key:
+# Replace with your actual API key
 API_KEY = "AIzaSyAJZBZN5HBWXtM5zPZiKOyee_MssBU7Htw"
 genai.configure(api_key=API_KEY)
 model = genai.GenerativeModel("gemini-2.0-flash")
@@ -31,7 +32,7 @@ def save_history(history):
 # Load conversation history on startup
 conversation_history = load_history()
 
-# Load sentiment data (aggregated sentiment)
+# Load sentiment data
 try:
     with open(SENTIMENT_FILE, "r") as f:
         sentiment_data = json.load(f)
@@ -39,7 +40,6 @@ except Exception as e:
     print(f"Error loading sentiment data: {e}")
     sentiment_data = []
 
-# A simple route so you can check the backend is running.
 @app.route("/", methods=["GET"])
 def index():
     return "Backend is running!", 200
@@ -53,19 +53,16 @@ def chat():
     if not user_input:
         return jsonify({"error": "No message provided"}), 400
 
-    # Sort sentiment data by refined_sentiment in descending order.
-    # This selects the top 5 bullish tickers.
+    # Sort sentiment data by descending refined_sentiment
     sorted_tickers = sorted(sentiment_data, key=lambda x: x['refined_sentiment'], reverse=True)
     top_5 = sorted_tickers[:5]
-    ticker_summary = "\n".join(
-        f"{item['ticker']} (score: {item['refined_sentiment']})" for item in top_5
-    )
+    # Build a small list of top 5
+    ticker_summary = ", ".join(f"{item['ticker']}" for item in top_5)
 
-    # Build a prompt that includes style instructions and ticker recommendations.
+    # Prompt instructing the model to avoid bracket/markdown formatting
     prompt = f"""
-Act like a wallstreetbets user, but more normal. Keep responses short and sweet.
-Here are the top tickers based on sentiment:
-{ticker_summary}
+Act like a normal WSB user. Keep responses short, sweet, and do not use bracket or markdown formatting.
+Here are the top 5 tickers based on sentiment: {ticker_summary}
 
 User: {user_input}
 
@@ -75,8 +72,12 @@ Conversation history:
 
     response = model.generate_content(prompt)
     bot_response = response.text.strip()
+    bot_response = re.sub(r"\[.*?\]", "", bot_response)
 
-    # Update and save conversation history
+
+    # If you want to absolutely remove leftover bracket text, see optional Step 4 below.
+
+    # Update conversation history
     conversation_history = user_input + "\n" + bot_response + "\n" + conversation_history
     save_history(conversation_history)
 
@@ -89,3 +90,4 @@ def get_history():
 
 if __name__ == "__main__":
     app.run(debug=True)
+
