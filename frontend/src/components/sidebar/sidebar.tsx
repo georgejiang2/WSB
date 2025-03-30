@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import './sidebar.css';
 import wsbLogo from '../../assets/WSB.png'
-
+import Graph from '../graphs/Graph.tsx'
 
 export const Sidebar = () => {
   const [isSidebarOpen, setIsSidebarOpen] = useState(true);
