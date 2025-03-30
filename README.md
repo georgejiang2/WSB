@@ -8,9 +8,9 @@ Not financial advice
 
 
 Created by:
-Divyesh Gabbireddy
-George Jiang
-Glen Jiang
-Rohan Kyada
+Divyesh Gabbireddy, 
+George Jiang, 
+Glen Jiang, 
+Rohan Kyada, 
 Steven Guo
 
