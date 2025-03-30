@@ -18,26 +18,24 @@ export const Sidebar = () => {
         </div>
         <div className="sidebar-content">
           <ul className="sidebar-menu">
-            <li className="sidebar-item active">
-              <span className="sidebar-icon">🚀</span>
-              {isSidebarOpen && <span className="sidebar-label">Dashboard</span>}
-            </li>
-            <li className="sidebar-item">
-              <span className="sidebar-icon">📈</span>
-              {isSidebarOpen && <span className="sidebar-label">Trending</span>}
-            </li>
-            <li className="sidebar-item">
-              <span className="sidebar-icon">💎</span>
-              {isSidebarOpen && <span className="sidebar-label">Diamond Hands</span>}
-            </li>
-            <li className="sidebar-item">
-              <span className="sidebar-icon">🦍</span>
-              {isSidebarOpen && <span className="sidebar-label">Ape Together</span>}
-            </li>
-            <li className="sidebar-item">
-              <span className="sidebar-icon">💰</span>
-              {isSidebarOpen && <span className="sidebar-label">YOLO Plays</span>}
-            </li>
+            <a href="/top-posts">
+                <li className="sidebar-item active">
+                    <span className="sidebar-icon">🚀</span>
+                    {isSidebarOpen && <span className="sidebar-label">Trending</span>}
+                </li>
+            </a>
+            <a href="/wsb-chatbot">
+                <li className="sidebar-item">
+                    <span className="sidebar-icon">🤖</span>
+                    {isSidebarOpen && <span className="sidebar-label">WSB Chatbot</span>}
+                </li>
+            </a>
+            <a href="/top-posts">
+                <li className="sidebar-item">
+                    <span className="sidebar-icon">📈</span>
+                    {isSidebarOpen && <span className="sidebar-label">Simulation</span>}
+                </li>
+            </a>
           </ul>
         </div>
 

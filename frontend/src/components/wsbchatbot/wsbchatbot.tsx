@@ -2,10 +2,12 @@ import React from 'react';
 import './wsbchatbot.css';
 import char from '../../assets/aigirl.jpg';
 import char2 from '../../assets/wojak.jpg';
+import Sidebar from '../sidebar/sidebar';
 
 export const WsbChatbot = () => {
   return (
-    <>
+    <>  <div class="sidechat">
+        <div><Sidebar /></div>
         <div class="chat-container">
             <div class="chat-box">
                 <div class="chat-window">
@@ -38,7 +40,7 @@ export const WsbChatbot = () => {
                 <input type="text" class="chat-input" placeholder="Type your message..." />
             </div>
         </div>
-
+        </div>
     </>
   );
 };

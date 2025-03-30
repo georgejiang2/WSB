@@ -19,8 +19,14 @@
     color: var(--text-light);
     background-color: var(--bg-dark); /* Set body background to match chat background */
   }
-  
+  .sidechat {
+    display:flex;
+    position: relative;
+    justify-content: end;
+    flex-direction: row;
+  }
   .chat-container {
+    position: relative;
     width: 100%;
     max-width: 100%; /* Full width */
     background-color: var(--bg-dark);

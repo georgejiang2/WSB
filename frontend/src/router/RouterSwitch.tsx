@@ -4,17 +4,14 @@ import { Home } from "../components/home/home"
 import { TopPosts } from "../components/topposts/topposts"
 import { WsbChatbot } from "../components/wsbchatbot/wsbchatbot"
 import { Trading } from "../components/trading/trading"
-import { Sidebar } from "../components/sidebar/sidebar"
 
 export default function RouterSwitch() {
     return (
         <Routes>
             <Route path={pageHome} element={<Home />} />
             <Route path={pageWsbChatbot} element={<WsbChatbot />} />
-            <Route path={pageTopPosts} element={<Sidebar />} />
-            {/*
             <Route path={pageTopPosts} element={<TopPosts />} />
-            <Route path={pageTrading} element={<Trading />} />*/}
+            <Route path={pageTrading} element={<Trading />} />
         </Routes>
     )
 }

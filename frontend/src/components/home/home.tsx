@@ -42,7 +42,7 @@ export const Home = () => {
         <br></br>
         <br></br>
         <div className="features">
-          <div className="feature-card" onClick={() => handleClick(pageTrading)}>
+          <div className="feature-card" onClick={() => handleClick(pageTopPosts)}>
             <div className="feature-icon"><img src={community} alt="community logo" style={{ width: '12rem', height: 'auto' }} /></div>
             <h3>Community Insights</h3>
             <p>Stay updated with the latest WSB discussions and trends</p>
@@ -54,7 +54,7 @@ export const Home = () => {
             <p>Interact with our WSB-trained AI assistant for investment ideas</p>
           </div>
 
-          <div className="feature-card" onClick={() => handleClick(pageTopPosts)}>
+          <div className="feature-card" onClick={() => handleClick(pageTrading)}>
             <div className="feature-icon"><img src={stock} alt="stock logo" style={{ width: '12rem', height: 'auto' }} /></div>
             <h3>Trade Analysis</h3>
             <p>See a stock trading simulation created using WSB posts</p>
