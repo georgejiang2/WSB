@@ -33,7 +33,7 @@ body {
   display: flex;
   flex-direction: column;
   flex-grow: 1;
-  overflow-y: hidden;
+  overflow-y: auto;
   margin: 0;
   border-radius: 0; /* Remove border radius */
   box-shadow: none; /* Remove shadow */
@@ -262,7 +262,7 @@ background-color: var(--bg-dark);
 display: flex;
 flex-direction: column;
 flex-grow: 1;
-overflow-y: hidden;
+overflow-y: auto;
 transition: margin-left 0.3s cubic-bezier(0.25, 0.1, 0.25, 1), width 0.3s cubic-bezier(0.25, 0.1, 0.25, 1);
 border-radius: 0;
 box-shadow: none;
