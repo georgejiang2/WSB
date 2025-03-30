@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useRef } from "react";
 import MyChart from "./MyChart";
 import sampleData from "../../portfolio_data/portfolio_total_investment.json";
+import spxData from "../../portfolio_data/spx_data.json";
 
 // Define the expected structure of the portfolio data
 interface PortfolioEntry {
@@ -11,20 +12,63 @@ interface PortfolioEntry {
     percentchange?: number; // This will be added in useEffect
 }
 
+interface SPXEntry {
+    Date: string;
+    "Percent Change": number;
+}
+
+interface CombinedDataPoint {
+    date: string;
+    portfolioValue?: number;
+    spxValue?: number;
+}
+
 const Graph: React.FC = () => {
     const [portfolioData, setPortfolioData] = useState<PortfolioEntry[]>([]);
+    const [comparisonData, setComparisonData] = useState<CombinedDataPoint[]>([]);
     const [isLoading, setIsLoading] = useState<boolean>(true);
 
     useEffect(() => {
         try {
+            // Process portfolio data
             const processedData: PortfolioEntry[] = sampleData.portfolio_statistics.map((entry: PortfolioEntry) => ({
                 ...entry,
                 percentchange: entry.investment ? entry.total_profit / entry.investment : 0, // Avoid division by zero
             }));
-
             setPortfolioData(processedData);
+
+            // Map of dates to combined data points
+            const combinedDataMap = new Map<string, CombinedDataPoint>();
+
+            // Process portfolio data
+            processedData.forEach(entry => {
+                combinedDataMap.set(entry.date, {
+                    date: entry.date,
+                    portfolioValue: entry.percentchange ? entry.percentchange * 100 : 0, // Convert to percentage
+                });
+            });
+
+            // Process S&P 500 data and merge with portfolio data
+            spxData.forEach((entry: SPXEntry) => {
+                const date = entry.Date;
+                const existing = combinedDataMap.get(date) || { date };
+                
+                combinedDataMap.set(date, {
+                    ...existing,
+                    spxValue: entry["Percent Change"]
+                });
+            });
+
+            // Convert map to array and sort by date
+            const combinedArray = Array.from(combinedDataMap.values())
+                .sort((a, b) => new Date(a.date).getTime() - new Date(b.date).getTime());
+
+            console.log("Combined data points:", combinedArray.length);
+            console.log("Sample data point:", combinedArray[0]);
+            
+            setComparisonData(combinedArray);
         } catch (error) {
-            console.error("Error processing portfolio data:", error);
+            console.error("Error processing data:", error);
         } finally {
             setIsLoading(false);
         }
@@ -56,7 +100,14 @@ const Graph: React.FC = () => {
             maximumFractionDigits: 2
         });
 
-        return { overallChangePercent, currentInvestment, totalProfit };
+        // Calculate S&P 500 performance if data is available
+        let spxPerformance = "N/A";
+        if (spxData && spxData.length > 0) {
+            const latestSPX = spxData[spxData.length - 1];
+            spxPerformance = `${(latestSPX["Percent Change"]).toFixed(2)}%`;
+        }
+
+        return { overallChangePercent, currentInvestment, totalProfit, spxPerformance };
     };
 
     const stats = getStats();
@@ -65,7 +116,6 @@ const Graph: React.FC = () => {
         <div className="bg-gray-50 p-6 rounded-lg">
             <div className="mb-6">
                 <h1 className="text-2xl font-bold text-gray-800 mb-2">Portfolio Performance Dashboard</h1>
-                <p className="text-gray-600">Track your investment returns over time</p>
             </div>
             
             {isLoading ? (
@@ -79,7 +129,7 @@ const Graph: React.FC = () => {
                 <>
                     {/* Stats Summary Cards */}
                     {stats && (
-                        <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
+                        <div className="grid grid-cols-1 md:grid-cols-4 gap-4 mb-6">
                             <div className="bg-white p-4 rounded-lg shadow-sm border border-gray-100">
                                 <p className="text-sm text-gray-500 mb-1">Total Investment</p>
                                 <p className="text-xl font-bold text-gray-800">{stats.currentInvestment}</p>
@@ -89,37 +139,32 @@ const Graph: React.FC = () => {
                                 <p className="text-xl font-bold text-gray-800">{stats.totalProfit}</p>
                             </div>
                             <div className="bg-white p-4 rounded-lg shadow-sm border border-gray-100">
-                                <p className="text-sm text-gray-500 mb-1">Return on Investment</p>
+                                <p className="text-sm text-gray-500 mb-1">Your ROI</p>
                                 <p className={`text-xl font-bold ${parseFloat(stats.overallChangePercent) >= 0 ? 'text-green-600' : 'text-red-600'}`}>
                                     {stats.overallChangePercent}%
+                                </p>
+                            </div>
+                            <div className="bg-white p-4 rounded-lg shadow-sm border border-gray-100">
+                                <p className="text-sm text-gray-500 mb-1">S&P 500 Return</p>
+                                <p className={`text-xl font-bold ${
+                                    stats.spxPerformance !== "N/A" && parseFloat(stats.spxPerformance) >= 0 
+                                    ? 'text-green-600' : 'text-red-600'}`}>
+                                    {stats.spxPerformance}
                                 </p>
                             </div>
                         </div>
                     )}
                     
                     {/* Main Chart */}
-                    <MyChart 
-                        chartData={portfolioData.map(entry => ({
-                            date: entry.date,
-                            investment: entry.investment,
-                            today_profit: entry.today_profit,
-                            total_profit: entry.total_profit,
-                            percentchange: entry.percentchange ?? 0, // Ensure it's always a number
-                        })) as { [key: string]: string | number }[]} 
-                        xKey="date" 
-                        yKey="percentchange" 
-                        title="Profit / Investment Over Time" 
-                        subtitle="Ratio of total profit to invested capital"
-                    />
+                    {comparisonData.length > 0 && (
+                        <MyChart 
+                            chartData={comparisonData} 
+                            xKey="date" 
+                            title="Performance Comparison" 
+                            subtitle="WSB vs. S&P 500"
+                        />
+                    )}
                     
-                    {/* Additional context or tips */}
-                    <div className="mt-6 bg-blue-50 p-4 rounded-lg border border-blue-100">
-                        <h3 className="text-sm font-semibold text-blue-800 mb-2">About This Chart</h3>
-                        <p className="text-sm text-blue-700">
-                            This chart shows your return on investment (ROI) over time, calculated as the ratio of profit to investment. 
-                            A positive percentage indicates profits, while a negative percentage indicates losses relative to your investment.
-                        </p>
-                    </div>
                 </>
             ) : (
                 <div className="bg-white p-6 rounded-lg shadow-sm border border-gray-200 text-center">

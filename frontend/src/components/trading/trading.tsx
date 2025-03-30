@@ -5,9 +5,16 @@ import Sidebar from '../sidebar/sidebar';
 export const Trading = () => {
 
   return (
+<<<<<<< Updated upstream
     <div>
       <Sidebar />
     </div>
+=======
+    <>
+        <div> <Sidebar /> </div>
+        <div> <Graph /> </div>
+    </>
+>>>>>>> Stashed changes
   );
 };
 
