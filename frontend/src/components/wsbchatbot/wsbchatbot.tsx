@@ -13,17 +13,17 @@ interface Message {
 }
 
 export const WsbChatbot: React.FC = () => {
-    const [isSidebarOpen, setIsSidebarOpen] = useState(true);
-  
-    const handleSidebarToggle = (isOpen: boolean | ((prevState: boolean) => boolean)) => {
-      setIsSidebarOpen(isOpen);
-    };
-  
+  const [isSidebarOpen, setIsSidebarOpen] = useState(true);
   const [message, setMessage] = useState<string>('');
   const [messages, setMessages] = useState<Message[]>([]);
 
   // Ref to scroll to bottom automatically
   const messagesEndRef = useRef<HTMLDivElement | null>(null);
+  const chatWindowRef = useRef<HTMLDivElement | null>(null);
+
+  const handleSidebarToggle = (isOpen: boolean | ((prevState: boolean) => boolean)) => {
+    setIsSidebarOpen(isOpen);
+  };
 
   // Load conversation history once
   useEffect(() => {
@@ -34,7 +34,7 @@ export const WsbChatbot: React.FC = () => {
           .split('\n')
           .filter((line: string) => line.trim() !== '');
         const formatted: Message[] = historyLines.map((line: string, index: number) => ({
-          sender: (index % 2 === 0 ? 'user' : 'bot'),
+          sender: (index % 2 === 0 ? 'user' : 'bot') as Sender,
           text: line,
         }));
         setMessages(formatted);
@@ -50,12 +50,11 @@ export const WsbChatbot: React.FC = () => {
     messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
   }, [messages]);
 
-
   const sendMessage = async () => {
     if (!message.trim()) return;
 
     // Add user message to local state
-    const newMessages = [...messages, { sender: 'user', text: message }];
+    const newMessages = [...messages, { sender: 'user' as Sender, text: message }];
     setMessages(newMessages);
     setMessage('');
 
@@ -65,7 +64,7 @@ export const WsbChatbot: React.FC = () => {
       const botResponse = response.data.response;
 
       // Add bot reply to local state
-      setMessages([...newMessages, { sender: 'bot', text: botResponse }]);
+      setMessages([...newMessages, { sender: 'bot' as Sender, text: botResponse }]);
     } catch (error) {
       console.error('Error sending message:', error);
     }
@@ -78,18 +77,16 @@ export const WsbChatbot: React.FC = () => {
   };
   
   return (
-    <>  
-      <div className="page-container">
-        <div>
-          <Sidebar onToggle={handleSidebarToggle} />
-        </div>
-        <div className={`chat-container ${isSidebarOpen ? 'sidebar-open' : 'sidebar-closed'}`}>
-          <div className="chat-box">
-            <div className="chat-window">
-              <div className="aiman">
-                <div className="image-container" />
-                <p>A personalized WSB AI companion to chat with!</p>
-              </div>{/* Actual messages */}
+    <div className="page-container">
+      <Sidebar onToggle={handleSidebarToggle} />
+      <div className={`chat-container ${isSidebarOpen ? 'sidebar-open' : 'sidebar-closed'}`}>
+        <div className="chat-box">
+          <div className="chat-window" ref={chatWindowRef}>
+            <div className="aiman">
+              <div className="image-container" />
+              <p>A personalized WSB AI companion to chat with!</p>
+            </div>
+            
             <div className="messages">
               {messages.map((msg, index) => {
                 const isUser = msg.sender === 'user';
@@ -97,16 +94,9 @@ export const WsbChatbot: React.FC = () => {
                 const username = isUser ? 'You' : 'WSB AI';
 
                 return (
-                  <div key={index}>
+                  <div key={index} className={`message-row ${isUser ? 'user-row' : 'bot-row'}`}>
                     {/* Avatar + username */}
-                    <div
-                      className={`avatar-container ${isUser ? 'user-avatar' : 'bot-avatar'}`}
-                      style={{
-                        display: 'flex',
-                        alignItems: 'center',
-                        justifyContent: isUser ? 'flex-end' : 'flex-start',
-                      }}
-                    >
+                    <div className={`avatar-container ${isUser ? 'user-avatar' : 'bot-avatar'}`}>
                       {isUser ? (
                         <>
                           <span className="username">{username}</span>
@@ -114,7 +104,6 @@ export const WsbChatbot: React.FC = () => {
                             src={avatarSrc}
                             alt="Avatar"
                             className="avatar"
-                            style={{ width: '3rem', marginLeft: '10px' }}
                           />
                         </>
                       ) : (
@@ -123,7 +112,6 @@ export const WsbChatbot: React.FC = () => {
                             src={avatarSrc}
                             alt="Avatar"
                             className="avatar"
-                            style={{ width: '3rem', marginRight: '10px' }}
                           />
                           <span className="username">{username}</span>
                         </>
@@ -154,12 +142,10 @@ export const WsbChatbot: React.FC = () => {
               onChange={(e) => setMessage(e.target.value)}
               onKeyDown={handleKeyDown}
             />
-            <button onClick={sendMessage}>Send</button>
           </div>
         </div>
       </div>
     </div>
-    </>
   );
 };
 

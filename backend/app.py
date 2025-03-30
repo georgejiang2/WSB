@@ -1,37 +1,48 @@
+# app.py
 from flask import Flask, request, jsonify
 from flask_cors import CORS
 import google.generativeai as genai
 import os
+import json
+import re
 
 app = Flask(__name__)
-CORS(app, origins=["http://localhost:5173"])  # Enable CORS for frontend communication
+CORS(app, origins=["http://localhost:5173"])
 
-# Configure API key
-API_KEY = "AIzaSyAJZBZN5HBWXtM5zPZiKOyee_MssBU7Htw"  # Replace with your real API key
+# Replace with your actual API key
+API_KEY = "AIzaSyAJZBZN5HBWXtM5zPZiKOyee_MssBU7Htw"
 genai.configure(api_key=API_KEY)
-
-# Initialize the Gemini model
 model = genai.GenerativeModel("gemini-2.0-flash")
 
-# File to store conversation history
-base_file = "base.txt"
+# Files for conversation history
+BASE_FILE = os.path.join(os.path.dirname(os.path.abspath(__file__)), "base.txt")
+HISTORY_FILE = os.path.join(os.path.dirname(os.path.abspath(__file__)), "history.txt")
+SENTIMENT_FILE = os.path.join(os.path.dirname(os.path.abspath(__file__)), "agg_sentiment.json")
 
-HISTORY_FILE = "history.txt"
-
-# Function to load conversation history
 def load_history():
-    if os.path.exists(base_file):
-        with open(base_file, "r", encoding="utf-8") as file:
+    if os.path.exists(BASE_FILE):
+        with open(BASE_FILE, "r", encoding="utf-8") as file:
             return file.read()
     return ""
 
-# Function to save conversation history
 def save_history(history):
     with open(HISTORY_FILE, "w", encoding="utf-8") as file:
         file.write(history)
 
-# Load existing history when the server starts
+# Load conversation history on startup
 conversation_history = load_history()
+
+# Load sentiment data
+try:
+    with open(SENTIMENT_FILE, "r") as f:
+        sentiment_data = json.load(f)
+except Exception as e:
+    print(f"Error loading sentiment data: {e}")
+    sentiment_data = []
+
+@app.route("/", methods=["GET"])
+def index():
+    return "Backend is running!", 200
 
 @app.route("/chat", methods=["POST"])
 def chat():
@@ -39,15 +50,34 @@ def chat():
 
     data = request.json
     user_input = data.get("message", "")
-
     if not user_input:
         return jsonify({"error": "No message provided"}), 400
 
-    # Generate response using Gemini
-    response = model.generate_content(user_input + "\nConversation history:\n" + conversation_history)
-    bot_response = response.text
+    # Sort sentiment data by descending refined_sentiment
+    sorted_tickers = sorted(sentiment_data, key=lambda x: x['refined_sentiment'], reverse=True)
+    top_5 = sorted_tickers[:5]
+    # Build a small list of top 5
+    ticker_summary = ", ".join(f"{item['ticker']}" for item in top_5)
 
-    # Update and save conversation history
+    # Prompt instructing the model to avoid bracket/markdown formatting
+    prompt = f"""
+Act like a normal WSB user. Keep responses short, sweet, and do not use bracket or markdown formatting.
+Here are the top 5 tickers based on sentiment: {ticker_summary}
+
+User: {user_input}
+
+Conversation history:
+{conversation_history}
+"""
+
+    response = model.generate_content(prompt)
+    bot_response = response.text.strip()
+    bot_response = re.sub(r"\[.*?\]", "", bot_response)
+
+
+    # If you want to absolutely remove leftover bracket text, see optional Step 4 below.
+
+    # Update conversation history
     conversation_history = user_input + "\n" + bot_response + "\n" + conversation_history
     save_history(conversation_history)
 
