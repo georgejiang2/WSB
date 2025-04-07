@@ -1,7 +1,7 @@
 from google import genai
 
 # Initialize the client
-client = genai.Client(api_key="AIzaSyAJZBZN5HBWXtM5zPZiKOyee_MssBU7Htw")
+client = genai.Client(api_key="")
 
 user_input = "Act like a moderate wallstreetbets user. Make responses short and sweet. "
 # Start a conversation with the first request

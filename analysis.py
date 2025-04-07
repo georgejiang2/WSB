@@ -5,7 +5,7 @@ import re
 from google import genai
 
 # Initialize Gemini client
-client = genai.Client(api_key="AIzaSyBK510Y6ikadkYmNKwy0f_LKdEoJjquGVo")
+client = genai.Client(api_key="")
 
 # Load WSB posts
 with open("wsb_posts.json", "r") as f:
